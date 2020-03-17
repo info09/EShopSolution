@@ -109,9 +109,20 @@ namespace EShopSolution.Application.Catalog.Products
             throw new NotImplementedException();
         }
 
-        public Task<int> Update(ProductUpdate request)
+        public async Task<int> Update(ProductUpdate request)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(request.Id);
+            var productTranslation = await _context.ProductTranslations.FirstOrDefaultAsync(i => i.ProductId == request.Id && i.LanguageId == request.LanguageId);
+            if (product == null || productTranslation == null) throw new EShopException("không tìm thấy product");
+
+            productTranslation.Name = request.Name;
+            productTranslation.SeoAlias = request.SeoAlias;
+            productTranslation.SeoDescription = request.SeoDescription;
+            productTranslation.SeoTitle = request.SeoTitle;
+            productTranslation.Description = request.Description;
+            productTranslation.Details = request.Details;
+
+            return await _context.SaveChangesAsync();
         }
 
         public Task<int> UpdateImage(int imageId, string caption, bool isDefault)
@@ -119,14 +130,20 @@ namespace EShopSolution.Application.Catalog.Products
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdatePrice(int productId, decimal newPrice)
+        public async Task<bool> UpdatePrice(int productId, decimal newPrice)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null) throw new EShopException("không tìm thấy product");
+            product.Price = newPrice;
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> UpdateStock(int productId, int addedQuantity)
+        public async Task<bool> UpdateStock(int productId, int addedQuantity)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null) throw new EShopException("không tìm thấy product");
+            product.Stock += addedQuantity;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
