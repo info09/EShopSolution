@@ -4,14 +4,16 @@ using EShopSolution.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EShopSolution.Data.Migrations
 {
     [DbContext(typeof(EShopDbContext))]
-    partial class EShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200318162001_add_table_productImage_2020.03.18")]
+    partial class add_table_productImage_20200318
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +80,7 @@ namespace EShopSolution.Data.Migrations
                         new
                         {
                             Id = new Guid("8d04dce2-969a-435d-bba4-df3f325983dc"),
-                            ConcurrencyStamp = "365977aa-99bc-4809-a5eb-4b03e7b16e61",
+                            ConcurrencyStamp = "52db2c12-4913-4860-b0ea-a2291e716f0d",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -155,7 +157,7 @@ namespace EShopSolution.Data.Migrations
                         {
                             Id = new Guid("69bd714f-9576-45ba-b5b7-f00649be00de"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b7c4ea4f-2427-4944-b1ab-9e36f35cb4d0",
+                            ConcurrencyStamp = "b012c454-6d8e-4194-854c-42ea90e5853e",
                             DOB = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "huytq3103@gmail.com",
                             EmailConfirmed = true,
@@ -164,7 +166,7 @@ namespace EShopSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "huytq3103@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDvrotsONZWtHz7RhrvNzYkck7tzn5RLG/6JL+DqVWw7dYXksRH6z/kM8Xq2jOrIpg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBdF3BkQ8qt5w8D20gccV6eLIi19J2Tq6hsvuG624Rn4LzRKUtvioNV2GnLhahfBTA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -418,7 +420,7 @@ namespace EShopSolution.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 3, 19, 0, 8, 32, 382, DateTimeKind.Local).AddTicks(7799));
+                        .HasDefaultValue(new DateTime(2020, 3, 18, 23, 19, 59, 992, DateTimeKind.Local).AddTicks(9212));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -511,7 +513,7 @@ namespace EShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2020, 3, 19, 0, 8, 32, 422, DateTimeKind.Local).AddTicks(9881),
+                            DateCreated = new DateTime(2020, 3, 18, 23, 20, 0, 64, DateTimeKind.Local).AddTicks(4276),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -535,8 +537,8 @@ namespace EShopSolution.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
+                    b.Property<int>("FileSize")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
