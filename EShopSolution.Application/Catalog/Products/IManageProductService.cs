@@ -14,6 +14,8 @@ namespace EShopSolution.Application.Catalog.Products
 
         Task<int> Update(ProductUpdate request);
 
+        Task<ProductViewModel> GetById(int productId, string languageId);
+
         Task<int> Delete(int productId);
 
         Task<bool> UpdatePrice(int productId, decimal newPrice);
