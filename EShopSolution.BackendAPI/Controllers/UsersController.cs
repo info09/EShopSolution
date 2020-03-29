@@ -20,20 +20,19 @@ namespace EShopSolution.BackendAPI.Controllers
             _userService = userService;
         }
 
-        [HttpPost("Authenticate")]
+        [HttpPost("authenticate")]
         [AllowAnonymous]
         public async Task<IActionResult> Authenticate([FromBody]LoginRequest request)
         {
             if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var resultToken = await _userService.Authencate(request);
+            if (string.IsNullOrEmpty(resultToken))
             {
-                return BadRequest();
+                return BadRequest("Username or password is incorrect.");
             }
-            var auth = await _userService.Authencate(request);
-            if (string.IsNullOrEmpty(auth))
-            {
-                return BadRequest();
-            }
-            return Ok(new { token = auth });
+            return Ok(resultToken);
         }
 
         [HttpPost("Register")]
